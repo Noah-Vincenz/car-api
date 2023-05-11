@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.car.api.model.Car;
+import com.car.api.model.ErrorResponse;
 import com.car.api.service.CarService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class CarController {
             List<Car> returnedCars = service.getAllCars();
             return new ResponseEntity(returnedCars, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to retrieve all cars"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
